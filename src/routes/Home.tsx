@@ -8,7 +8,6 @@ import {
     Skills,
     Education,
     Contact,
-    Footer,
     Navigation
 } from "@/components/portfolio"
 
@@ -23,7 +22,6 @@ function Portfolio() {
             <Skills />
             <Education />
             <Contact />
-            <Footer />
         </div>
     )
 }

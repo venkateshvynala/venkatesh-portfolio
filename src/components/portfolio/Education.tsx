@@ -1,85 +1,91 @@
+
 "use client"
-
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { GraduationCap } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { GraduationCap, Calendar } from "lucide-react"
 
-const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-}
+const educationList = [
+    {
+        degree: "Bachelor of Engineering - Electronics and Communication",
+        institution: "Saveetha School of Engineering, Chennai",
+        year: "March 2022",
+        percentage: "70%",
+        color: "from-blue-500 to-purple-600",
+    },
+    {
+        degree: "Class 12th - Intermediate",
+        institution: "Sree Chaitanya Jr College, Kavali",
+        year: "March 2017",
+        percentage: "88.1%",
+        color: "from-green-500 to-emerald-600",
+    },
+]
 
 export function Education() {
     return (
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-card">
+        <section id="education" className="py-20 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
             <div className="max-w-7xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-16"
                 >
-                    <h2 className="text-3xl font-bold text-foreground mb-4">Education</h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Strong analytical foundation with successful transition to data analytics
-                    </p>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold font-poppins text-slate-900 dark:text-white mb-4"
+                    >
+                        Education
+                    </motion.h2>
+                    <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: 80 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
+                    />
                 </motion.div>
-                <motion.div
-                    variants={fadeInUp}
-                    initial="initial"
-                    whileInView="animate"
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto"
-                >
-                    <Card className="overflow-hidden">
-                        <CardHeader className="bg-primary/5">
-                            <div className="flex items-start justify-between">
-                                <div className="flex items-start space-x-4">
-                                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                                        <GraduationCap className="h-8 w-8 text-primary" />
+
+                <div className="space-y-8">
+                    {educationList.map((education, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                            whileHover={{ scale: 1.02 }}
+                        >
+                            <Card className="p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
+                                <CardContent className="flex items-start space-x-6">
+                                    <div className="flex-shrink-0">
+                                        <div className={`w-16 h-16 bg-gradient-to-r ${education.color} rounded-2xl flex items-center justify-center`}>
+                                            <GraduationCap className="h-8 w-8 text-white" />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <CardTitle className="text-2xl">Bachelor of Technology (B.Tech)</CardTitle>
-                                        <CardDescription className="text-lg font-medium text-primary">Civil Engineering</CardDescription>
-                                        <p className="text-muted-foreground mt-1">
-                                            Jayamukhi Institute of Technological Sciences - Warangal
-                                        </p>
+                                    <div className="flex-1">
+                                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white font-poppins mb-2">{education.degree}</h3>
+                                        <p className="text-lg text-slate-600 dark:text-slate-300 font-inter mb-3">{education.institution}</p>
+                                        <div className="flex flex-wrap items-center gap-4">
+                                            <div className="flex items-center text-slate-500 dark:text-slate-400">
+                                                <Calendar className="h-4 w-4 mr-2" />
+                                                <span className="font-medium">{education.year}</span>
+                                            </div>
+                                            <div>
+                                                <span className="inline-block rounded border border-slate-400 px-2 py-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+                                                    {education.percentage} Percentage
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="text-right">
-                                    <Badge variant="secondary" className="text-lg px-3 py-1">
-                                        CGPA: 7.8/10
-                                    </Badge>
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent className="pt-6">
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 className="font-semibold mb-3 text-foreground">Academic Foundation</h4>
-                                    <p className="text-muted-foreground mb-4 leading-relaxed">
-                                        Strong analytical foundation with coursework in mathematics, statistics, and project management.
-                                        Successfully transitioned from civil engineering to data analytics, leveraging problem-solving
-                                        skills and attention to detail in business intelligence solutions.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold mb-3 text-foreground">Key Skills Developed</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        <Badge variant="outline">Mathematics</Badge>
-                                        <Badge variant="outline">Statistics</Badge>
-                                        <Badge variant="outline">Project Management</Badge>
-                                        <Badge variant="outline">Problem Solving</Badge>
-                                        <Badge variant="outline">Analytical Thinking</Badge>
-                                        <Badge variant="outline">Data Analysis</Badge>
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </motion.div>
+                                </CardContent>
+                            </Card>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </section>
     )
