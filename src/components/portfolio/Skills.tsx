@@ -93,7 +93,7 @@ export function Skills() {
     ]
 
     return (
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section id="skills" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950" />
 

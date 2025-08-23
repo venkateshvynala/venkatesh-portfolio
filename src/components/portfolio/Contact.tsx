@@ -76,7 +76,7 @@ export function Contact() {
     ]
 
     return (
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-red-50 to-orange-50 dark:from-pink-950 dark:via-red-950 dark:to-orange-950" />
             

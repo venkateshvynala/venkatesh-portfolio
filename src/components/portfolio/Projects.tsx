@@ -138,7 +138,7 @@ export function Projects() {
 
     return (
         <>
-            <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 {/* Background Elements */}
                 <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 dark:from-green-950 dark:via-blue-950 dark:to-purple-950" />
                 
