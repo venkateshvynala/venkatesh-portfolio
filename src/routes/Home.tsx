@@ -22,6 +22,7 @@ function Portfolio() {
             <Skills />
             <Education />
             <Contact />
+            
         </div>
     )
 }
