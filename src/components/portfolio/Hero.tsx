@@ -1,232 +1,188 @@
 "use client"
-
+// import ProfileImg from "@/assets/MyImage.jpeg"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Download, Mail, ArrowDown, Sparkles, TrendingUp, Award } from "lucide-react"
+import { Link } from "react-router-dom"
+import { Code, Server, Database, ChevronDown, BarChart3, Calendar } from "lucide-react"
+import { fadeInUp, staggerContainer } from "@/components/theme/animation-variants"
+import { Linkedin, Briefcase, Mail, Phone } from 'lucide-react';
 
 export function Hero() {
-    const scrollToNextSection = () => {
-        const nextSection = document.querySelector('section:nth-of-type(2)')
-        if (nextSection) {
-            nextSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            })
-        }
-    }
+    const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollIndicator(window.scrollY <= 20);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-            {/* Background Elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                {/* Subtle Grid Pattern */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:80px_80px] opacity-30" />
-
-                {/* Floating Elements - Very Subtle */}
-                <motion.div
-                    className="absolute top-32 left-16 w-48 h-48 bg-gradient-to-r from-blue-200/10 to-indigo-200/10 rounded-full blur-3xl"
-                    animate={{
-                        y: [0, -20, 0],
-                        x: [0, 15, 0],
-                    }}
-                    transition={{
-                        duration: 25,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                />
-                <motion.div
-                    className="absolute bottom-32 right-16 w-32 h-32 bg-gradient-to-r from-indigo-200/10 to-purple-200/10 rounded-full blur-3xl"
-                    animate={{
-                        y: [0, 20, 0],
-                        x: [0, -15, 0],
-                    }}
-                    transition={{
-                        duration: 30,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                />
-            </div>
-
-            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    {/* Left Content - Text */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center lg:text-left order-2 lg:order-1"
-                    >
-
-                        {/* Greeting */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-base text-slate-600 dark:text-slate-400 font-medium mb-3"
-                        >
-                            Hello, I'm
-                        </motion.p>
-
-                        {/* Main Title */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-                        >
-                            <span
-                                className="  text-blue-600 dark:text-blue-400  ">
-                                Venkatesh Vynala
-                            </span>
-                        </motion.h1>
-
-                        {/* Subtitle */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="text-slate-800 dark:text-slate-100 font-bold"
-                        >
-                            Power BI Developer & Business Intelligence Specialist
-                        </motion.p>
-
-                        {/* Description */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
-                            className="text-base text-slate-600 dark:text-slate-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
-                        >
-                            Transforming complex datasets into actionable insights with expertise in Power BI, DAX, data modeling, and dashboard development. Certified Microsoft Power BI Data Analyst with 3+ years of experience.
-                        </motion.p>
-
-                        {/* CTA Buttons */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
-                            className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8"
-                        >
-                            <Button
-                                size="default"
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+        <section id="home" className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative">
+            <div className="max-w-7xl mx-auto w-full ">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    {/* Left Content */}
+                    <motion.div variants={staggerContainer} initial="initial" animate="animate" className="text-center lg:text-left">
+                        <motion.div variants={fadeInUp} className="mb-6">
+                            <motion.span
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium font-poppins mb-4"
                             >
-                                <Download className="h-4 w-4 mr-2" />
-                                Download Resume
-                            </Button>
-
-                            <Button
-                                size="default"
-                                variant="outline"
-                                className="border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-300"
-                            >
-                                <Mail className="h-4 w-4 mr-2" />
-                                Contact Me
-                            </Button>
+                                👋 Hello, I'm
+                            </motion.span>
                         </motion.div>
 
-                        {/* Quick Stats */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                            className="grid grid-cols-3 gap-4 max-w-xs mx-auto lg:mx-0"
+                        <motion.h1
+                            variants={fadeInUp}
+                            className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins text-slate-900 dark:text-white mb-4 leading-tight"
                         >
+                            Venkatesh Vynala
+                            <motion.span
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1, duration: 0.8 }}
+                                className="block text-3xl sm:text-4xl lg:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mt-2"
+                            >
+                                Power BI Developer
+                            </motion.span>
+                        </motion.h1>
+
+                        <motion.p
+                            variants={fadeInUp}
+                            className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed font-inter max-w-2xl mx-auto lg:mx-0"
+                        >
+                            Associate Software Engineer with <span className="font-semibold text-blue-600">3+ years </span>
+                            of experience building scalable web applications.
+                            <span className=""> Awarded with Bright Beginner and Star Performer at Ahex Technologies.</span>
+                        </motion.p>
+
+                        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    to="https://www.canva.com/design/DAFj-JlZs_I/lYKRtoro-a54diJcflWvuA/view?utm_content=DAFj-JlZs_I&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+                                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-poppins font-medium px-8 py-3 rounded-full shadow-lg"
+                                >
+                                    Check My Resume
+                                </Link>
+                            </motion.div>
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://github.com/venu123143"
+                                    className="font-poppins font-medium px-8 py-3 rounded-full border-2 hover:bg-blue-50 dark:hover:bg-slate-800"
+                                >
+                                    Visit Dashboards
+                                </a>
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.div variants={fadeInUp} className="flex justify-center lg:justify-start space-x-4">
                             {[
-                                { number: "3+", label: "Years", icon: TrendingUp },
-                                { number: "50+", label: "Projects", icon: Award },
-                                { number: "100%", label: "Success", icon: Sparkles },
-                            ].map((stat, index) => (
-                                <div key={stat.label} className="text-center">
-                                    <div className="flex items-center justify-center w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg mb-2 mx-auto">
-                                        <stat.icon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                                    </div>
-                                    <div className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-1">
-                                        {stat.number}
-                                    </div>
-                                    <div className="text-xs text-slate-600 dark:text-slate-400 font-medium">
-                                        {stat.label}
-                                    </div>
-                                </div>
+                                { icon: Linkedin, href: "https://www.linkedin.com/in/venureddy9493/", color: "hover:text-blue-600" },
+                                { icon: Briefcase, href: "https://www.fiverr.com/sellers/venu_9090/", color: "hover:text-green-600" },
+                                { icon: Mail, href: "mailto:venugopalreddy9493@gmail.com", color: "hover:text-red-600" },
+                                { icon: Phone, href: "tel:+918008952100", color: "hover:text-purple-600" },
+                            ].map((social, index) => (
+                                <motion.a
+                                    key={index}
+                                    href={social.href}
+                                    target={social.href.startsWith("http") ? "_blank" : undefined}
+                                    rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                    whileHover={{ scale: 1.2, y: -2 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    className={`p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 ${social.color} transition-all duration-300`}
+                                >
+                                    <social.icon className="h-5 w-5" />
+                                </motion.a>
                             ))}
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Content - Profile Picture */}
+                    {/* Right Content - Image */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="order-1 lg:order-2 flex justify-center lg:justify-end"
+                        initial={{ opacity: 0, scale: 0.8, x: 100 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3, ease: [0.6, -0.05, 0.01, 0.99] }}
+                        className="relative"
                     >
-                        <div className="relative">
-                            {/* Profile Picture Container */}
+                        <div className="relative mx-auto w-80 h-80 lg:w-96 lg:h-96">
+                            {/* Background decorations */}
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                                className="relative w-64 h-64 lg:w-72 lg:h-72"
-                            >
-                                {/* Background Circle */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 rounded-full blur-2xl opacity-60" />
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                                className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-20 blur-xl"
+                            />
+                            <motion.div
+                                animate={{ rotate: -360 }}
+                                transition={{ duration: 50, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                                className="absolute inset-4 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 opacity-20 blur-lg"
+                            />
 
-                                {/* Profile Picture Frame */}
-                                <div className="relative w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full p-1.5 shadow-xl">
-                                    {/* Placeholder for Profile Picture */}
-                                    <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-800 rounded-full flex items-center justify-center overflow-hidden">
-                                        <div className="text-center p-6">
-                                            <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-                                                <span className="text-2xl font-bold text-white">VV</span>
-                                            </div>
-                                            <p className="text-xs text-slate-500 dark:text-slate-400">
-                                                Add your profile picture here
-                                            </p>
-                                        </div>
-                                    </div>
+                            {/* Main image container */}
+                            <div className="relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1 shadow-2xl">
+                                <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-slate-800">
+                                    <img src="/MyImage.jpeg" alt="Venu Gopal Reddy V" className="w-full h-full object-cover" />
                                 </div>
+                            </div>
 
-                                {/* Floating Elements Around Profile */}
-                                <motion.div
-                                    className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center shadow-md"
-                                    animate={{ y: [0, -8, 0] }}
-                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                >
-                                    <span className="text-white text-xs">⭐</span>
-                                </motion.div>
+                            {/* Floating elements */}
+                            <motion.div
+                                animate={{ y: [-5, 5, -5] }}
+                                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                                className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 rounded-full p-3 shadow-lg border border-slate-200 dark:border-slate-700"
+                            >
+                                <Database className="h-6 w-6 text-blue-600" />
+                            </motion.div>
 
-                                <motion.div
-                                    className="absolute -bottom-2 -left-2 w-5 h-5 bg-green-400 rounded-full flex items-center justify-center shadow-md"
-                                    animate={{ y: [0, 8, 0] }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                >
-                                    <span className="text-white text-xs">💡</span>
-                                </motion.div>
+                            <motion.div
+                                animate={{ y: [5, -5, 5] }}
+                                transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
+                                className="absolute -bottom-4 -left-4 bg-white dark:bg-slate-800 rounded-full p-3 shadow-lg border border-slate-200 dark:border-slate-700"
+                            >
+                                <Calendar className="h-6 w-6 text-purple-600" />
+                            </motion.div>
+
+                            <motion.div
+                                animate={{ y: [-3, 7, -3] }}
+                                transition={{ duration: 4.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.5 }}
+                                className="absolute top-1/2 -left-8 bg-white dark:bg-slate-800 rounded-full p-3 shadow-lg border border-slate-200 dark:border-slate-700"
+                            >
+                                <BarChart3 className="h-6 w-6 text-green-600" />
                             </motion.div>
                         </div>
                     </motion.div>
                 </div>
+                {/* Scroll indicator */}
+                {showScrollIndicator && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1, duration: 1 }}
+                        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-10"
+                        onClick={() => {
+                            const aboutSection = document.getElementById('about');
+                            if (aboutSection) {
+                                aboutSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                    >
+                        <motion.div
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
+                            className="flex flex-col items-center space-y-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                        >
+                            <span className="text-sm font-poppins">Scroll to explore</span>
+                            <ChevronDown className="h-5 w-5" />
+                        </motion.div>
+                    </motion.div>
+                )}
             </div>
-
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.0 }}
-                className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
-            >
-                <motion.button
-                    onClick={scrollToNextSection}
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="flex flex-col items-center text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 cursor-pointer bg-transparent border-none outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2"
-                    aria-label="Scroll to next section"
-                >
-                    <span className="text-xs mb-1 font-medium">Scroll Down</span>
-                    <ArrowDown className="h-4 w-4" />
-                </motion.button>
-            </motion.div>
         </section>
     )
 }
