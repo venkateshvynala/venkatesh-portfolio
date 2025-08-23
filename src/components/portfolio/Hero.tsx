@@ -1,9 +1,9 @@
 "use client"
-// import ProfileImg from "@/assets/MyImage.jpeg"
+import ProfileImg from "@/assets/venky_img.jpg"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { Code, Server, Database, ChevronDown, BarChart3, Calendar } from "lucide-react"
+import { Database, ChevronDown, BarChart3, Calendar } from "lucide-react"
 import { fadeInUp, staggerContainer } from "@/components/theme/animation-variants"
 import { Linkedin, Briefcase, Mail, Phone } from 'lucide-react';
 
@@ -19,8 +19,50 @@ export function Hero() {
     }, []);
 
     return (
-        <section id="home" className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative">
-            <div className="max-w-7xl mx-auto w-full ">
+        <section id="home" className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-50/50 via-transparent to-pink-50/50 dark:from-cyan-950/50 dark:to-pink-950/50" />
+            
+            {/* Floating Background Shapes */}
+            <motion.div
+                className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-200/30 to-purple-200/30 rounded-full blur-3xl"
+                animate={{
+                    y: [0, -30, 0],
+                    x: [0, 20, 0],
+                }}
+                transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            />
+            <motion.div
+                className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"
+                animate={{
+                    y: [0, 30, 0],
+                    x: [0, -20, 0],
+                }}
+                transition={{
+                    duration: 25,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            />
+            <motion.div
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-indigo-200/20 to-blue-200/20 rounded-full blur-3xl"
+                animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            />
+            
+            <div className="relative z-10 max-w-7xl mx-auto w-full ">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Left Content */}
                     <motion.div variants={staggerContainer} initial="initial" animate="animate" className="text-center lg:text-left">
@@ -127,7 +169,7 @@ export function Hero() {
                             {/* Main image container */}
                             <div className="relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1 shadow-2xl">
                                 <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-slate-800">
-                                    <img src="/MyImage.jpeg" alt="Venu Gopal Reddy V" className="w-full h-full object-cover" />
+                                    <img src={ProfileImg} alt="Venu Gopal Reddy V" className="w-full h-full object-cover object-bottom scale-110" />
                                 </div>
                             </div>
 
