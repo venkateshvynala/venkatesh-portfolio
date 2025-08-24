@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
 
 interface Project {
@@ -53,12 +54,26 @@ const projects: Project[] = [
     description: "Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.",
     image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035598/powerbi-dashboards/IMG-20250824-WA0004_rwi2u3.jpg",
     technologies: ["PowerBI", "Marketing Analytics", "ROI Tracking", "Multi-channel Attribution"]
+  },
+  {
+    id: 7,
+    title: "Marketing Campaign Tracker",
+    description: `
+      Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.
+      Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.
+      Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.
+      Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.
+      Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.
+      Marketing performance dashboard measuring campaign effectiveness, ROI analysis, and customer acquisition costs across multiple channels.
+    `,
+    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756036986/powerbi-dashboards/WhatsApp_Image_2025-08-24_at_17.31.23_b1e64f9a_oe7cdt.jpg",
+    technologies: ["PowerBI", "Marketing Analytics", "ROI Tracking", "Multi-channel Attribution"]
   }
 ]
 
 export const Projects = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true, 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
     align: 'center',
     skipSnaps: false,
     dragFree: false,
@@ -126,8 +141,8 @@ export const Projects = () => {
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex">
               {projects.map((project, index) => (
-                <div 
-                  key={project.id} 
+                <div
+                  key={project.id}
                   className="embla__slide flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-4"
                 >
                   <div className="relative group cursor-pointer">
@@ -140,7 +155,7 @@ export const Projects = () => {
                           alt={project.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
-                        
+
                         {/* Overlay with Project Info */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                           <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -148,27 +163,6 @@ export const Projects = () => {
                               <h3 className="text-2xl font-bold text-white leading-tight">
                                 {project.title}
                               </h3>
-                              <p className="text-white/90 text-sm leading-relaxed line-clamp-3">
-                                {project.description}
-                              </p>
-                              
-                              {/* Technology Tags */}
-                              <div className="flex flex-wrap gap-2">
-                                {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                                  <span
-                                    key={techIndex}
-                                    className="px-2 py-1 bg-primary/30 text-primary-foreground rounded-full text-xs font-medium border border-primary/40 backdrop-blur-sm"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                                {project.technologies.length > 3 && (
-                                  <span className="px-2 py-1 bg-white/20 text-white rounded-full text-xs font-medium border border-white/30 backdrop-blur-sm">
-                                    +{project.technologies.length - 3}
-                                  </span>
-                                )}
-                              </div>
-
                               {/* Full Screen Button */}
                               <div className="flex justify-center">
                                 <Button
@@ -176,7 +170,7 @@ export const Projects = () => {
                                     e.stopPropagation()
                                     openFullScreen(project)
                                   }}
-                                  className="bg-primary/90 hover:bg-primary text-primary-foreground rounded-full w-12 h-12 p-0 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                                  className="bg-primary/90 cursor-pointer hover:bg-primary text-primary-foreground rounded-full w-12 h-12 p-0 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
                                   variant="ghost"
                                   size="icon"
                                 >
@@ -203,7 +197,7 @@ export const Projects = () => {
           >
             <ChevronLeft className="w-6 h-6" />
           </Button>
-          
+
           <Button
             onClick={scrollNext}
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg z-10"
@@ -219,11 +213,10 @@ export const Projects = () => {
               <button
                 key={index}
                 onClick={() => scrollTo(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  selectedSlides.includes(index)
-                    ? 'bg-primary scale-125 shadow-lg shadow-primary/50'
-                    : 'bg-muted hover:bg-muted-foreground'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${selectedSlides.includes(index)
+                  ? 'bg-primary scale-125 shadow-lg shadow-primary/50'
+                  : 'bg-muted hover:bg-muted-foreground'
+                  }`}
               />
             ))}
           </div>
@@ -243,7 +236,7 @@ export const Projects = () => {
               {/* Close Button */}
               <Button
                 onClick={closeFullScreen}
-                className="absolute top-6 right-6 z-50 bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg"
+                className="absolute cursor-pointer top-6 right-6 z-50 bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg"
                 variant="ghost"
                 size="icon"
               >
@@ -264,29 +257,28 @@ export const Projects = () => {
                 </div>
 
                 {/* Project Details Section */}
-                <div className="w-full lg:w-96 bg-card/80 backdrop-blur-md p-6 lg:p-8 border-l border-border/50">
+                <div className="w-full lg:w-96 bg-card/80 backdrop-blur-md p-6 lg:p-8 border-l border-border/50 overflow-y-auto max-h-screen project-details-scroll">
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-3xl font-bold gradient-text mb-3">
                         {fullScreenProject.title}
                       </h3>
-                      <p className="text-foreground text-lg leading-relaxed">
+                      <p className="text-foreground text-lg leading-relaxed whitespace-pre-line">
                         {fullScreenProject.description}
                       </p>
                     </div>
-                    
+
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">
                         Technologies Used
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {fullScreenProject.technologies.map((tech, index) => (
-                          <span
+                          <Badge
                             key={index}
-                            className="px-3 py-2 bg-primary/20 text-primary-foreground rounded-lg text-sm font-medium border border-primary/30"
                           >
                             {tech}
-                          </span>
+                          </Badge>
                         ))}
                       </div>
                     </div>

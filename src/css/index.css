@@ -500,4 +500,28 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Project details scrollbar styling */
+  .project-details-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--muted);
+  }
+
+  .project-details-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .project-details-scroll::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 3px;
+  }
+
+  .project-details-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+  }
+
+  .project-details-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+  }
 }
