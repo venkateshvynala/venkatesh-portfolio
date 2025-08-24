@@ -1,395 +1,324 @@
-"use client"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { 
+  BarChart3, 
+  TrendingUp, 
+  Users, 
+  DollarSign, 
+  Package, 
+  Heart,
+  Play,
+  ExternalLink,
+  ChevronRight,
+  Database,
+  Eye,
+  MousePointer
+} from "lucide-react";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Eye, X, ArrowRight, Sparkles, Zap, Target, TrendingUp, Users, Globe, Shield } from "lucide-react"
-import { useState } from "react"
+const projectsData = [
+  {
+    id: 1,
+    title: "Sales Performance Analytics",
+    category: "Sales & Marketing",
+    type: "interactive",
+    description: "Real-time sales dashboard with KPI tracking and predictive analytics",
+    image: "/api/placeholder/600/400",
+    technologies: ["Power BI", "DAX", "Power Query", "SQL Server"],
+    metrics: { users: "500+", impact: "35% increase", performance: "Real-time" },
+    icon: TrendingUp,
+    gradient: "bg-gradient-primary",
+    features: ["Interactive KPI cards", "Regional performance maps", "Predictive forecasting", "Mobile responsive"],
+    demoUrl: "#",
+    isLive: true
+  },
+  {
+    id: 2,
+    title: "Financial Dashboard Suite",
+    category: "Finance",
+    type: "image",
+    description: "Comprehensive financial reporting with automated variance analysis",
+    image: "/api/placeholder/600/400",
+    technologies: ["Power BI", "Excel", "SharePoint", "Power Automate"],
+    metrics: { accuracy: "99.8%", time_saved: "40 hours/month", reports: "25+" },
+    icon: DollarSign,
+    gradient: "bg-gradient-secondary",
+    features: ["Automated reporting", "Variance analysis", "Budget tracking", "Executive summaries"],
+    isLive: false
+  },
+  {
+    id: 3,
+    title: "HR Analytics Platform",
+    category: "Human Resources", 
+    type: "interactive",
+    description: "Employee performance tracking and workforce planning insights",
+    image: "/api/placeholder/600/400",
+    technologies: ["Power BI", "Azure SQL", "Power Platform"],
+    metrics: { employees: "2000+", retention: "+25%", insights: "Real-time" },
+    icon: Users,
+    gradient: "bg-gradient-accent",
+    features: ["Performance tracking", "Attrition analysis", "Workforce planning", "Diversity metrics"],
+    demoUrl: "#",
+    isLive: true
+  },
+  {
+    id: 4,
+    title: "Supply Chain Optimization",
+    category: "Operations",
+    type: "image",
+    description: "End-to-end supply chain visibility with inventory optimization",
+    image: "/api/placeholder/600/400",
+    technologies: ["Power BI", "SAP", "Power Automate"],
+    metrics: { cost_reduction: "20%", efficiency: "+30%", visibility: "100%" },
+    icon: Package,
+    gradient: "bg-gradient-data",
+    features: ["Inventory tracking", "Supplier scorecards", "Demand forecasting", "Cost analysis"],
+    isLive: false
+  },
+  {
+    id: 5,
+    title: "Customer 360 Dashboard",
+    category: "Customer Experience",
+    type: "interactive",
+    description: "Complete customer journey analytics with lifetime value tracking",  
+    image: "/api/placeholder/600/400",
+    technologies: ["Power BI", "Dynamics 365", "Azure"],
+    metrics: { satisfaction: "+40%", ltv: "+50%", churn: "-15%" },
+    icon: Heart,
+    gradient: "bg-gradient-primary",
+    features: ["Customer segmentation", "Journey mapping", "Churn prediction", "Satisfaction scoring"],
+    demoUrl: "#",
+    isLive: true
+  },
+  {
+    id: 6,
+    title: "Healthcare Analytics Hub",
+    category: "Healthcare",
+    type: "image", 
+    description: "Patient care analytics with operational efficiency metrics",
+    image: "/api/placeholder/600/400",
+    technologies: ["Power BI", "FHIR", "Azure Health Bot"],
+    metrics: { patients: "10K+", efficiency: "+45%", outcomes: "Improved" },
+    icon: BarChart3,
+    gradient: "bg-gradient-secondary",
+    features: ["Patient outcomes", "Resource optimization", "Quality metrics", "Compliance tracking"],
+    isLive: false
+  }
+];
 
-const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-}
+const categories = ["All", "Sales & Marketing", "Finance", "Human Resources", "Operations", "Customer Experience", "Healthcare"];
 
-const staggerContainer = {
-    animate: {
-        transition: {
-            staggerChildren: 0.1,
-        },
-    },
-}
+export function PowerBIProjects() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
-export function Projects() {
-    const [selectedImage, setSelectedImage] = useState<string | null>(null)
-    const [selectedProject, setSelectedProject] = useState<any>(null)
+  const filteredProjects = selectedCategory === "All" 
+    ? projectsData 
+    : projectsData.filter(project => project.category === selectedCategory);
 
-    const projects = [
-        {
-            title: "Sales Performance Dashboard",
-            description: "Comprehensive sales analytics with KPI tracking, trend analysis, and regional performance metrics",
-            tech: ["Power BI", "DAX", "SQL Server"],
-            image: "/sales-dashboard.png",
-            icon: TrendingUp,
-            color: "from-blue-500 to-purple-500",
-            fullDescription:
-                "A comprehensive sales performance dashboard that provides real-time insights into sales metrics, regional performance, and trend analysis. Features include interactive KPI cards, drill-down capabilities, and automated alerts for performance thresholds.",
-            features: [
-                "Real-time KPI tracking",
-                "Regional performance analysis",
-                "Trend forecasting",
-                "Interactive drill-downs",
-                "Automated alerts",
-            ],
-            impact: "Improved sales visibility by 40% and reduced reporting time by 60%",
-        },
-        {
-            title: "Financial Reporting Suite",
-            description: "Automated financial reports with drill-down capabilities and variance analysis",
-            tech: ["Power BI", "Power Query", "Excel"],
-            image: "/financial-dashboard.png",
-            icon: Target,
-            color: "from-green-500 to-blue-500",
-            fullDescription:
-                "An automated financial reporting suite that streamlines monthly and quarterly financial reporting processes. Includes variance analysis, budget vs actual comparisons, and executive summary dashboards.",
-            features: [
-                "Automated report generation",
-                "Variance analysis",
-                "Budget tracking",
-                "Executive summaries",
-                "Multi-currency support",
-            ],
-            impact: "Reduced financial reporting time by 70% and improved accuracy by 95%",
-        },
-        {
-            title: "HR Analytics Platform",
-            description: "Employee performance tracking, attrition analysis, and workforce planning insights",
-            tech: ["Power BI", "Azure SQL", "DAX"],
-            image: "/hr-analytics-dashboard.png",
-            icon: Users,
-            color: "from-orange-500 to-red-500",
-            fullDescription:
-                "A comprehensive HR analytics platform that provides insights into employee performance, attrition patterns, and workforce planning. Includes predictive analytics for talent retention and recruitment optimization.",
-            features: [
-                "Performance tracking",
-                "Attrition prediction",
-                "Workforce planning",
-                "Talent analytics",
-                "Diversity metrics",
-            ],
-            impact: "Reduced employee turnover by 25% through predictive analytics",
-        },
-        {
-            title: "Supply Chain Optimization",
-            description: "Real-time inventory tracking and supply chain performance monitoring",
-            tech: ["Power BI", "Power Automate", "SharePoint"],
-            image: "/supply-chain-dashboard.png",
-            icon: Globe,
-            color: "from-purple-500 to-pink-500",
-            fullDescription:
-                "A real-time supply chain optimization dashboard that monitors inventory levels, supplier performance, and logistics efficiency. Includes automated alerts and predictive analytics for demand forecasting.",
-            features: [
-                "Real-time inventory tracking",
-                "Supplier performance monitoring",
-                "Demand forecasting",
-                "Logistics optimization",
-                "Cost analysis",
-            ],
-            impact: "Optimized inventory levels reducing costs by 30% and improving delivery times by 20%",
-        },
-        {
-            title: "Customer Insights Dashboard",
-            description: "Customer behavior analysis with segmentation and lifetime value calculations",
-            tech: ["Power BI", "Azure", "Power Query"],
-            image: "/customer-analytics-dashboard.png",
-            icon: Sparkles,
-            color: "from-yellow-500 to-orange-500",
-            fullDescription:
-                "A customer insights dashboard that analyzes customer behavior, segments customers based on various criteria, and calculates customer lifetime value. Includes churn prediction and personalization recommendations.",
-            features: [
-                "Customer segmentation",
-                "Lifetime value calculation",
-                "Churn prediction",
-                "Behavior analysis",
-                "Personalization insights",
-            ],
-            impact: "Increased customer retention by 35% and improved marketing ROI by 50%",
-        },
-        {
-            title: "Paginated Reports System",
-            description: "Automated generation of formatted reports for regulatory compliance",
-            tech: ["Power BI Report Builder", "SQL", "SSRS"],
-            image: "/paginated-report-template.png",
-            icon: Shield,
-            color: "from-indigo-500 to-purple-500",
-            fullDescription:
-                "An automated paginated reports system designed for regulatory compliance and formal business reporting. Features pixel-perfect formatting, automated distribution, and compliance tracking.",
-            features: [
-                "Pixel-perfect formatting",
-                "Automated distribution",
-                "Compliance tracking",
-                "Multi-format export",
-                "Scheduled delivery",
-            ],
-            impact: "Achieved 100% compliance reporting accuracy and reduced manual effort by 80%",
-        },
-    ]
+  return (
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-4 w-72 h-72 bg-power-blue/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 -right-4 w-96 h-96 bg-power-purple/10 rounded-full blur-3xl" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-power-green/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+      </div>
 
-    return (
-        <>
-            <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-                {/* Background Elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 dark:from-green-950 dark:via-blue-950 dark:to-purple-950" />
-                
-                {/* Floating Elements */}
-                <motion.div
-                    className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-10 blur-3xl"
-                    animate={{
-                        y: [0, -40, 0],
-                        x: [0, 30, 0],
-                    }}
-                    transition={{
-                        duration: 18,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                />
-                <motion.div
-                    className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-r from-green-400 to-blue-400 rounded-full opacity-10 blur-3xl"
-                    animate={{
-                        y: [0, 40, 0],
-                        x: [0, -30, 0],
-                    }}
-                    transition={{
-                        duration: 22,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                />
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="inline-flex items-center justify-center z-20 w-20 h-20 bg-gradient-primary rounded-2xl mb-6 shadow-glow"
+          >
+            <Database className="w-10 h-10 text-white" />
+          </motion.div>
 
-                <div className="relative z-10 max-w-7xl mx-auto">
-                    {/* Section Header */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mb-6 shadow-2xl shadow-green-500/30"
-                        >
-                            <Zap className="h-10 w-10 text-white" />
-                        </motion.div>
-                        <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-                            <span className="bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                Featured Projects
-                            </span>
-                        </h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                            A showcase of my Power BI development work and data visualization expertise
-                        </p>
-                    </motion.div>
+          <h2 className="text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-power-blue via-power-purple to-power-green bg-clip-text text-transparent">
+              Power BI Portfolio
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Interactive dashboards and analytics solutions that transform data into actionable business insights
+          </p>
+        </motion.div>
 
-                    {/* Projects Grid */}
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="initial"
-                        whileInView="animate"
-                        viewport={{ once: true }}
-                        className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-                    >
-                        {projects.map((project, index) => (
-                            <motion.div key={index} variants={fadeInUp}>
-                                <Card className="group h-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden">
-                                    {/* Project Image */}
-                                    <div
-                                        className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-t-lg overflow-hidden relative"
-                                        onClick={() => setSelectedImage(project.image)}
-                                    >
-                                        <div className="absolute inset-0 bg-gradient-to-br from-gray-200/50 to-gray-300/50 dark:from-gray-700/50 dark:to-gray-800/50" />
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className={`w-20 h-20 bg-gradient-to-r ${project.color} rounded-full flex items-center justify-center shadow-2xl`}>
-                                                <project.icon className="h-10 w-10 text-white" />
-                                            </div>
-                                        </div>
-                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                            <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                        </div>
-                                    </div>
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
+          {categories.map((category, index) => (
+            <motion.button
+              key={category}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 + index * 0.05 }}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                selectedCategory === category
+                  ? 'bg-gradient-primary text-white shadow-interactive'
+                  : 'bg-white/80 text-muted-foreground hover:bg-white hover:text-foreground shadow-sm'
+              }`}
+            >
+              {category}
+            </motion.button>
+          ))}
+        </motion.div>
 
-                                    {/* Project Content */}
-                                    <CardHeader className="pb-4">
-                                        <CardTitle className="text-xl text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                                            {project.title}
-                                        </CardTitle>
-                                        <CardDescription className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                                            {project.description}
-                                        </CardDescription>
-                                    </CardHeader>
+        {/* Projects Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="relative"
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCategory}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {filteredProjects.map((project, index) => (
+                    <CarouselItem key={project.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
+                        whileHover={{ y: -8 }}
+                        onHoverStart={() => setHoveredProject(project.id)}
+                        onHoverEnd={() => setHoveredProject(null)}
+                        className="group h-full"
+                      >
+                        <Card className="h-full bg-white/80 backdrop-blur-sm border-0 shadow-dashboard hover:shadow-interactive transition-all duration-500 overflow-hidden">
+                          {/* Project Preview */}
+                          <div className="relative aspect-video bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+                            {/* Placeholder for dashboard preview */}  
+                            <div className="absolute inset-0 bg-gradient-to-br from-slate-200/50 to-slate-300/50" />
+                            
+                            {/* Interactive Icon Overlay */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className={`w-16 h-16 ${project.gradient} rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300 ${hoveredProject === project.id ? 'scale-110' : ''}`}>
+                                <project.icon className="w-8 h-8 text-white" />
+                              </div>
+                            </div>
 
-                                    <CardContent className="pt-0">
-                                        {/* Tech Stack */}
-                                        <div className="flex flex-wrap gap-2 mb-6">
-                                            {project.tech.map((tech) => (
-                                                <Badge 
-                                                    key={tech} 
-                                                    variant="outline" 
-                                                    className="text-xs bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300"
-                                                >
-                                                    {tech}
-                                                </Badge>
-                                            ))}
-                                        </div>
+                            {/* Type Badge */}
+                            <div className="absolute top-4 left-4">
+                              <Badge variant="secondary" className="bg-white/90 text-slate-700 backdrop-blur-sm">
+                                {project.type === 'interactive' ? (
+                                  <><MousePointer className="w-3 h-3 mr-1" /> Interactive</>
+                                ) : (
+                                  <><Eye className="w-3 h-3 mr-1" /> Static</>
+                                )}
+                              </Badge>
+                            </div>
 
-                                        {/* View Details Button */}
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            className="w-full group/btn bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                                            onClick={() => setSelectedProject(project)}
-                                        >
-                                            <span className="flex items-center gap-2">
-                                                <ExternalLink className="h-4 w-4" />
-                                                View Details
-                                                <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                                            </span>
-                                        </Button>
-                                    </CardContent>
+                            {/* Live Badge */}
+                            {project.isLive && (
+                              <div className="absolute top-4 right-4">
+                                <Badge className="bg-power-green text-white animate-pulse-glow">
+                                  <div className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse" />
+                                  Live
+                                </Badge>
+                              </div>
+                            )}
 
-                                    {/* Hover Effect Overlay */}
-                                    <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-lg pointer-events-none`} />
-                                </Card>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Image Modal */}
-            {selectedImage && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
-                    onClick={() => setSelectedImage(null)}
-                >
-                    <motion.div
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0.8 }}
-                        className="relative max-w-4xl max-h-[90vh] w-full"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            className="absolute top-4 right-4 z-10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300"
-                            onClick={() => setSelectedImage(null)}
-                        >
-                            <X className="h-4 w-4" />
-                        </Button>
-                        <img
-                            src={selectedImage || "/placeholder.svg"}
-                            alt="Project screenshot"
-                            className="w-full h-full object-contain rounded-lg shadow-2xl"
-                        />
-                    </motion.div>
-                </motion.div>
-            )}
-
-            {/* Project Details Modal */}
-            {selectedProject && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
-                    onClick={() => setSelectedProject(null)}
-                >
-                    <motion.div
-                        initial={{ scale: 0.8, y: 50 }}
-                        animate={{ scale: 1, y: 0 }}
-                        exit={{ scale: 0.8, y: 50 }}
-                        className="relative max-w-4xl max-h-[90vh] w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="overflow-y-auto max-h-[90vh]">
-                            {/* Header with Image */}
-                            <div className="relative">
-                                <div className="h-64 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
-                                    <div className={`w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl`}>
-                                        <selectedProject.icon className="h-12 w-12 text-white" />
-                                    </div>
-                                </div>
-                                <Button
-                                    variant="outline"
-                                    size="icon"
-                                    className="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300"
-                                    onClick={() => setSelectedProject(null)}
+                            {/* Hover Overlay */}
+                            <div className={`absolute inset-0 bg-black/20 backdrop-blur-[1px] transition-opacity duration-300 ${hoveredProject === project.id ? 'opacity-100' : 'opacity-0'}`}>
+                              <div className="absolute bottom-4 left-4 right-4">
+                                <motion.div
+                                  initial={{ y: 20, opacity: 0 }}
+                                  animate={{ y: hoveredProject === project.id ? 0 : 20, opacity: hoveredProject === project.id ? 1 : 0 }}
+                                  className="flex gap-2"
                                 >
-                                    <X className="h-4 w-4" />
-                                </Button>
+                                  {project.type === 'interactive' && (
+                                    <Button size="sm" className="bg-white/90 text-slate-700 hover:bg-white">
+                                      <Play className="w-3 h-3 mr-1" />
+                                      Demo
+                                    </Button>
+                                  )}
+                                  <Button size="sm" variant="outline" className="bg-white/90 text-slate-700 border-white/50 hover:bg-white">
+                                    <ExternalLink className="w-3 h-3 mr-1" />  
+                                    View
+                                  </Button>
+                                </motion.div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Project Info */}
+                          <CardContent className="p-6">
+                            <div className="flex items-start justify-between mb-3">
+                              <h3 className="text-xl font-bold text-foreground group-hover:text-power-blue transition-colors">
+                                {project.title}
+                              </h3>
+                              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-power-blue group-hover:translate-x-1 transition-all" />
                             </div>
 
-                            {/* Content */}
-                            <div className="p-8">
-                                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                    {selectedProject.title}
-                                </h2>
-                                <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-                                    {selectedProject.fullDescription}
-                                </p>
+                            <p className="text-muted-foreground mb-4 leading-relaxed">
+                              {project.description}
+                            </p>
 
-                                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                                    {/* Features */}
-                                    <div>
-                                        <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200 flex items-center gap-2">
-                                            <Sparkles className="h-5 w-5 text-blue-500" />
-                                            Key Features
-                                        </h3>
-                                        <ul className="space-y-3">
-                                            {selectedProject.features.map((feature: string, index: number) => (
-                                                <li key={index} className="flex items-start gap-3">
-                                                    <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0" />
-                                                    <span className="text-gray-600 dark:text-gray-400">{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                            {/* Technologies */}
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {project.technologies.slice(0, 3).map((tech) => (
+                                <Badge key={tech} variant="outline" className="text-xs bg-power-blue/5 border-power-blue/20 text-power-blue">
+                                  {tech}
+                                </Badge>
+                              ))}
+                              {project.technologies.length > 3 && (
+                                <Badge variant="outline" className="text-xs bg-slate-50 border-slate-200 text-slate-600">
+                                  +{project.technologies.length - 3}
+                                </Badge>
+                              )}
+                            </div>
 
-                                    {/* Tech & Impact */}
-                                    <div>
-                                        <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200 flex items-center gap-2">
-                                            <Zap className="h-5 w-5 text-green-500" />
-                                            Technologies Used
-                                        </h3>
-                                        <div className="flex flex-wrap gap-2 mb-6">
-                                            {selectedProject.tech.map((tech: string) => (
-                                                <Badge key={tech} variant="outline" className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300">
-                                                    {tech}
-                                                </Badge>
-                                            ))}
-                                        </div>
-                                        
-                                        <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200 flex items-center gap-2">
-                                            <Target className="h-5 w-5 text-orange-500" />
-                                            Business Impact
-                                        </h3>
-                                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                                            {selectedProject.impact}
-                                        </p>
-                                    </div>
+                            {/* Key Metrics */}
+                            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100">
+                              {Object.entries(project.metrics).map(([key, value]) => (
+                                <div key={key} className="text-center">
+                                  <div className="text-sm font-bold text-power-blue">{value}</div>
+                                  <div className="text-xs text-muted-foreground capitalize">{key.replace('_', ' ')}</div>
                                 </div>
+                              ))}
                             </div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-            )}
-        </>
-    )
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden md:flex -left-12 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl" />
+                <CarouselNext className="hidden md:flex -right-12 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl" />
+              </Carousel>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
+  );
 }
