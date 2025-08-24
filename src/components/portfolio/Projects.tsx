@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
@@ -72,44 +71,27 @@ const projects: Project[] = [
 ]
 
 export const Projects = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: 'center',
-    skipSnaps: false,
-    dragFree: false,
-    containScroll: 'trimSnaps'
-  })
-  const [selectedSlides, setSelectedSlides] = useState<number[]>([])
+  const [currentPage, setCurrentPage] = useState(0)
   const [isFullScreen, setIsFullScreen] = useState(false)
   const [fullScreenProject, setFullScreenProject] = useState<Project | null>(null)
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setSelectedSlides([emblaApi.selectedScrollSnap()])
-  }, [emblaApi])
+  const itemsPerPage = 6
+  const totalPages = Math.ceil(projects.length / itemsPerPage)
+  const startIndex = currentPage * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentProjects = projects.slice(startIndex, endIndex)
 
-  useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on('select', onSelect)
-    emblaApi.on('reInit', onSelect)
-    return () => {
-      emblaApi.off('select', onSelect)
-      emblaApi.off('reInit', onSelect)
-    }
-  }, [emblaApi, onSelect])
+  const goToPage = (page: number) => {
+    setCurrentPage(page)
+  }
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
+  const goToNextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages)
+  }
 
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
-
-  const scrollTo = useCallback((index: number) => {
-    if (emblaApi) emblaApi.scrollTo(index)
-  }, [emblaApi])
+  const goToPrevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages)
+  }
 
   const openFullScreen = (project: Project) => {
     setFullScreenProject(project)
@@ -124,7 +106,7 @@ export const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-background via-background-light to-background-dark">
+    <section id="projects" className="py-20 ">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -136,95 +118,93 @@ export const Projects = () => {
           </p>
         </div>
 
-        {/* Modern Carousel Container */}
+        {/* Projects Grid Container */}
         <div className="relative max-w-7xl mx-auto">
-          <div className="embla overflow-hidden" ref={emblaRef}>
-            <div className="embla__container flex">
-              {projects.map((project, index) => (
-                <div
-                  key={project.id}
-                  className="embla__slide flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-4"
-                >
-                  <div className="relative group cursor-pointer">
-                    {/* Project Card */}
-                    <div className="relative overflow-hidden rounded-2xl glass border border-border/50 shadow-2xl transition-all duration-500 hover:shadow-2xl hover:scale-[1.02]">
-                      {/* Image Container */}
-                      <div className="relative aspect-[4/3] bg-gradient-to-br from-card to-card/80 overflow-hidden">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
+          {/* Projects Grid - 3 columns, 2 rows */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {currentProjects.map((project) => (
+              <div key={project.id} className="relative group cursor-pointer">
+                {/* Project Card */}
+                <div className="relative overflow-hidden rounded-2xl glass border border-border/50 shadow-2xl transition-all duration-500 hover:shadow-2xl hover:scale-[1.02]">
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3]  from-card to-card/80 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
 
-                        {/* Overlay with Project Info */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                          <div className="absolute bottom-0 left-0 right-0 p-6">
-                            <div className="space-y-4">
-                              <h3 className="text-2xl font-bold text-white leading-tight">
-                                {project.title}
-                              </h3>
-                              {/* Full Screen Button */}
-                              <div className="flex justify-center">
-                                <Button
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    openFullScreen(project)
-                                  }}
-                                  className="bg-primary/90 cursor-pointer hover:bg-primary text-primary-foreground rounded-full w-12 h-12 p-0 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
-                                  variant="ghost"
-                                  size="icon"
-                                >
-                                  <Maximize2 className="w-5 h-5" />
-                                </Button>
-                              </div>
-                            </div>
+                    {/* Overlay with Project Info */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <div className="space-y-4">
+                          <h3 className="text-2xl font-bold text-white leading-tight">
+                            {project.title}
+                          </h3>
+                          {/* Full Screen Button */}
+                          <div className="flex justify-center">
+                            <Button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                openFullScreen(project)
+                              }}
+                              className="bg-primary/90 cursor-pointer hover:bg-primary text-primary-foreground rounded-full w-12 h-12 p-0 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                              variant="ghost"
+                              size="icon"
+                            >
+                              <Maximize2 className="w-5 h-5" />
+                            </Button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Arrows */}
-          <Button
-            onClick={scrollPrev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg z-10"
-            variant="ghost"
-            size="icon"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </Button>
-
-          <Button
-            onClick={scrollNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg z-10"
-            variant="ghost"
-            size="icon"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </Button>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollTo(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${selectedSlides.includes(index)
-                  ? 'bg-primary scale-125 shadow-lg shadow-primary/50'
-                  : 'bg-muted hover:bg-muted-foreground'
-                  }`}
-              />
+              </div>
             ))}
           </div>
 
-          {/* Project Counter */}
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-center space-x-4">
+            {/* Previous Button */}
+            <Button
+              onClick={goToPrevPage}
+              className="bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg"
+              variant="ghost"
+              size="icon"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </Button>
+
+            {/* Page Indicators */}
+            <div className="flex space-x-2">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToPage(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentPage
+                    ? 'bg-primary scale-125 shadow-lg shadow-primary/50'
+                    : 'bg-muted hover:bg-muted-foreground'
+                    }`}
+                />
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <Button
+              onClick={goToNextPage}
+              className="bg-black/60 hover:bg-black/80 text-white rounded-full w-12 h-12 transition-all duration-300 hover:scale-110 shadow-lg"
+              variant="ghost"
+              size="icon"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </Button>
+          </div>
+
+          {/* Page Counter */}
           <div className="text-center mt-4">
             <span className="text-muted-foreground text-sm">
-              {selectedSlides[0] + 1} of {projects.length}
+              Page {currentPage + 1} of {totalPages} ({startIndex + 1}-{Math.min(endIndex, projects.length)} of {projects.length})
             </span>
           </div>
         </div>

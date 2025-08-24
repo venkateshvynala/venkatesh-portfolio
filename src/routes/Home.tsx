@@ -52,7 +52,7 @@ function Portfolio() {
 
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen">
             <div className="fixed inset-0 -z-10 dark:hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-cyan-50/50 via-transparent to-pink-50/50" />

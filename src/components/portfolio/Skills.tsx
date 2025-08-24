@@ -22,40 +22,87 @@ export function Skills() {
 
     const skillCategories = [
         {
-            title: "Power BI Core",
+            title: "Power BI & Visualization",
             icon: BarChart3,
             color: "from-blue-500 to-purple-500",
-            skills: ["Power BI Desktop", "Power BI Service", "Power BI Mobile", "Power BI Report Server"]
+            skills: [
+                "Power BI Desktop",
+                "Power BI Service",
+                "Power BI Mobile",
+                "Power BI Report Server",
+                "Custom Visuals",
+                "Bookmarks & Drill-throughs",
+                "Dashboard Design",
+                "Report Layouts"
+            ]
         },
         {
             title: "Data Modeling & DAX",
             icon: Database,
             color: "from-green-500 to-blue-500",
-            skills: ["DAX Formulas", "Measures", "Data Modeling", "Star Schema", "Snowflake Schema", "Calculated Columns",]
+            skills: [
+                "DAX Formulas",
+                "Measures & Calculated Columns",
+                "Data Modeling",
+                "Star Schema",
+                "Snowflake Schema",
+                "Time Intelligence",
+                "Performance Optimization"
+            ]
         },
         {
-            title: "Data Transformation",
+            title: "Data Transformation & ETL",
             icon: RefreshCw,
             color: "from-orange-500 to-red-500",
-            skills: ["Power Query", "M Language", "Data Cleaning", "ETL Processes", "Data Validation"]
-        },
-        {
-            title: "Visualization & Design",
-            icon: PieChart,
-            color: "from-purple-500 to-pink-500",
-            skills: ["Custom Visuals", "Dashboard Design", "Report Layouts", "Color Theory", "User Experience"]
+            skills: [
+                "Power Query (M Language)",
+                "Data Cleaning",
+                "ETL Processes",
+                "Data Validation",
+                "Automated Data Refresh",
+                "Data Migration (CSV to Azure DevOps)"
+            ]
         },
         {
             title: "Data Sources & Integration",
             icon: Layers,
             color: "from-cyan-500 to-blue-500",
-            skills: ["SQL Server", "SharePoint", "Excel Files", "CSV/JSON", "REST APIs", "OData"]
+            skills: [
+                "SQL Server",
+                "Excel & SharePoint",
+                "Azure DevOps",
+                "JIRA Integration",
+                "REST APIs",
+                "OData",
+                "Git/Jenkins CI/CD"
+            ]
         },
         {
-            title: "Advanced Analytics",
-            icon: TrendingUp,
+            title: "DevOps & Jira  Administration",
+            icon: Shield,
+            color: "from-purple-500 to-pink-500",
+            skills: [
+                "Azure DevOps Boards",
+                "JIRA (Admin & Automation Rules)",
+                "Agile/Scrum/SAFe",
+                "CI/CD Pipelines (Jenkins)",
+                "Role-Based Access Control",
+                "Row-Level Security (RLS)"
+            ]
+        },
+        {
+            title: "Programming & Automation",
+            icon: Zap,
             color: "from-yellow-500 to-orange-500",
-            skills: ["Time Intelligence", "Statistical Functions", "Forecasting", "What-If Analysis", "Advanced DAX"]
+            skills: [
+                "Power Platform",
+                "Python (Basic)",
+                "Automation Scripting",
+                "Performance Tuning",
+                "Statistical Functions",
+                "Forecasting",
+                "What-If Analysis"
+            ]
         }
     ]
 
