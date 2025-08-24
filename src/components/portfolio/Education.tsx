@@ -6,17 +6,17 @@ import { GraduationCap, Calendar } from "lucide-react"
 
 const educationList = [
     {
-        degree: "Bachelor of Engineering - Electronics and Communication",
-        institution: "Saveetha School of Engineering, Chennai",
-        year: "March 2022",
-        percentage: "70%",
+        degree: "Bachelor of Engineering - Civil Engineering",
+        institution: "Jayamukhi Institute of Technological Sciences, Warangal",
+        year: "July 2021",
+        percentage: "78%",
         color: "from-blue-500 to-purple-600",
     },
     {
-        degree: "Class 12th - Intermediate",
-        institution: "Sree Chaitanya Jr College, Kavali",
-        year: "March 2017",
-        percentage: "88.1%",
+        degree: "Diploma - Civil Engineering",
+        institution: "VMR Polytechnic College, Warangal",
+        year: "July 2018",
+        percentage: "80%",
         color: "from-green-500 to-emerald-600",
     },
 ]

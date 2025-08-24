@@ -96,9 +96,9 @@ export function Hero() {
                             variants={fadeInUp}
                             className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed font-inter max-w-2xl mx-auto lg:mx-0"
                         >
-                            Associate Software Engineer with <span className="font-semibold text-blue-600">3+ years </span>
-                            of experience building scalable web applications.
-                            <span className=""> Awarded with Bright Beginner and Star Performer at Ahex Technologies.</span>
+                            Certified Power BI Deveoper with <span className="font-semibold text-blue-600">3+ years </span>
+                            of experience in Business Intelligence, Data Modeling, and Dashboard Development. Skilled in Power BI, SQL, Azure DevOps, JIRA administration, and CI/CD automation.
+                            <span className=""></span>
                         </motion.p>
 
                         <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
