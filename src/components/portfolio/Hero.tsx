@@ -5,17 +5,15 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { Database, ChevronDown, BarChart3, Calendar } from "lucide-react"
 import { fadeInUp, staggerContainer } from "@/components/theme/animation-variants"
-import { Linkedin, Briefcase, Mail, Phone } from 'lucide-react';
+import { Linkedin, Mail, Phone } from 'lucide-react';
 import Resume from "@/assets/VYNALA_VENKATESH.pdf"
 
 interface HeroProps {
-    // activeSection: string
-    setActiveSection: (section: string) => void
     scrollToSection: (sectionId: string) => void
 }
 
 
-export function Hero({ setActiveSection, scrollToSection }: HeroProps) {
+export function Hero({ scrollToSection }: HeroProps) {
     const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
     useEffect(() => {
@@ -134,10 +132,10 @@ export function Hero({ setActiveSection, scrollToSection }: HeroProps) {
 
                         <motion.div variants={fadeInUp} className="flex justify-center lg:justify-start space-x-4">
                             {[
-                                { icon: Linkedin, href: "https://www.linkedin.com/in/venureddy9493/", color: "hover:text-blue-600" },
-                                { icon: Briefcase, href: "https://www.fiverr.com/sellers/venu_9090/", color: "hover:text-green-600" },
-                                { icon: Mail, href: "mailto:venugopalreddy9493@gmail.com", color: "hover:text-red-600" },
-                                { icon: Phone, href: "tel:+918008952100", color: "hover:text-purple-600" },
+                                { icon: Linkedin, href: "https://www.linkedin.com/in/venkatesh-vynala-43b8b81a8/", color: "hover:text-blue-600" },
+                                // { icon: Briefcase, href: "https://www.fiverr.com/sellers/venu_9090/", color: "hover:text-green-600" },
+                                { icon: Mail, href: "mailto:venkateshvynala001@gmail.com", color: "hover:text-red-600" },
+                                { icon: Phone, href: "tel:+919642594022", color: "hover:text-purple-600" },
                             ].map((social, index) => (
                                 <motion.a
                                     key={index}

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Linkedin, Github, Twitter, Instagram, Send, MessageCircle, Globe, Heart } from "lucide-react"
+import { Mail, Phone, MapPin, Linkedin, Github, Send, MessageCircle, Globe, Heart } from "lucide-react"
 
 const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -58,20 +58,6 @@ export function Contact() {
             color: "from-gray-700 to-gray-900",
             href: "#",
             description: "Code Repository"
-        },
-        { 
-            name: "Twitter", 
-            icon: Twitter, 
-            color: "from-blue-400 to-blue-500",
-            href: "#",
-            description: "Thoughts & Updates"
-        },
-        { 
-            name: "Instagram", 
-            icon: Instagram, 
-            color: "from-pink-500 to-purple-500",
-            href: "#",
-            description: "Personal Life"
         },
     ]
 

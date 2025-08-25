@@ -1,9 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3, Users, TrendingUp, Database, Brain, Target, Zap, Lightbulb, Shield, PieChart } from "lucide-react"
+import { BarChart3, Users, Database, Brain, Target, Zap, Lightbulb, Shield, PieChart } from "lucide-react"
 
 const staggerContainer = {
     animate: {

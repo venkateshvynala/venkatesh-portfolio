@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart3, Database, Award, Shield, Globe, Zap, Brain, TrendingUp, PieChart, Layers, RefreshCw } from "lucide-react"
+import { BarChart3, Database, Award, Shield, Globe, Zap, Brain, Layers, RefreshCw } from "lucide-react"
 
 const staggerContainer = {
     animate: {
