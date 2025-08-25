@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3, Users, TrendingUp, Database, Brain, Target, Zap, Lightbulb, Shield } from "lucide-react"
+import { BarChart3, Users, TrendingUp, Database, Brain, Target, Zap, Lightbulb, Shield, PieChart } from "lucide-react"
 
 const staggerContainer = {
     animate: {
@@ -41,7 +41,7 @@ export function About() {
         <section id="about" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950" />
-            
+
             {/* Floating Elements */}
             <motion.div
                 className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full opacity-10 blur-3xl"
@@ -104,15 +104,15 @@ export function About() {
                     {/* Left Content */}
                     <motion.div variants={slideInLeft} className="space-y-8">
                         <div className="space-y-6">
-                            <motion.p 
+                            <motion.p
                                 className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
                                 whileHover={{ x: 10 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
                                 Certified Power BI Developer with over <span className="font-semibold text-blue-600 dark:text-blue-400">3+ years</span> of proven experience in Business Intelligence, Data Modeling, and Dashboard Development. Skilled at transforming complex datasets into actionable insights that enhance decision-making and operational efficiency.
                             </motion.p>
-                            
-                            <motion.p 
+
+                            <motion.p
                                 className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
                                 whileHover={{ x: 10 }}
                                 transition={{ type: "spring", stiffness: 300 }}
@@ -154,35 +154,35 @@ export function About() {
                     {/* Right Content - Stats Cards */}
                     <motion.div variants={slideInRight} className="grid grid-cols-2 gap-6">
                         {[
-                            { 
-                                icon: BarChart3, 
-                                number: "50+", 
+                            {
+                                icon: BarChart3,
+                                number: "50+",
                                 label: "JIRA Boards Managed",
                                 color: "from-blue-500 to-purple-500",
                                 delay: 0.1
                             },
-                            { 
-                                icon: Users, 
-                                number: "10+", 
+                            {
+                                icon: Users,
+                                number: "10+",
                                 label: "Scrum Teams Supported",
                                 color: "from-green-500 to-blue-500",
                                 delay: 0.2
                             },
-                            { 
-                                icon: TrendingUp, 
-                                number: "40%", 
-                                label: "Reporting Time Reduced",
+                            {
+                                icon: PieChart,
+                                number: "30+",
+                                label: "Reports generated",
                                 color: "from-orange-500 to-red-500",
                                 delay: 0.3
                             },
-                            { 
-                                icon: Database, 
-                                number: "3+", 
+                            {
+                                icon: Database,
+                                number: "3+",
                                 label: "Years Experience",
                                 color: "from-pink-500 to-purple-500",
                                 delay: 0.4
                             },
-                        ].map((stat, index) => (
+                        ].map((stat) => (
                             <motion.div
                                 key={stat.label}
                                 initial={{ opacity: 0, y: 30, scale: 0.8 }}
@@ -196,22 +196,22 @@ export function About() {
                                     <CardContent className="p-6 text-center relative">
                                         {/* Background Gradient */}
                                         <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
-                                        
+
                                         {/* Icon */}
                                         <div className={`relative z-10 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${stat.color} rounded-full mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300`}>
                                             <stat.icon className="h-8 w-8 text-white" />
                                         </div>
-                                        
+
                                         {/* Number */}
                                         <div className="relative z-10 text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-2">
                                             {stat.number}
                                         </div>
-                                        
+
                                         {/* Label */}
                                         <div className="relative z-10 text-sm text-gray-600 dark:text-gray-400 font-medium leading-tight">
                                             {stat.label}
                                         </div>
-                                        
+
                                         {/* Hover Effect */}
                                         <div className={`absolute inset-0 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-lg`} />
                                     </CardContent>

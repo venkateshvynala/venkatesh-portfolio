@@ -6,8 +6,16 @@ import { Link } from "react-router-dom"
 import { Database, ChevronDown, BarChart3, Calendar } from "lucide-react"
 import { fadeInUp, staggerContainer } from "@/components/theme/animation-variants"
 import { Linkedin, Briefcase, Mail, Phone } from 'lucide-react';
+import Resume from "@/assets/VYNALA_VENKATESH.pdf"
 
-export function Hero() {
+interface HeroProps {
+    // activeSection: string
+    setActiveSection: (section: string) => void
+    scrollToSection: (sectionId: string) => void
+}
+
+
+export function Hero({ setActiveSection, scrollToSection }: HeroProps) {
     const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
     useEffect(() => {
@@ -23,7 +31,7 @@ export function Hero() {
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950" />
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-50/50 via-transparent to-pink-50/50 dark:from-cyan-950/50 dark:to-pink-950/50" />
-            
+
             {/* Floating Background Shapes */}
             <motion.div
                 className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-200/30 to-purple-200/30 rounded-full blur-3xl"
@@ -61,7 +69,7 @@ export function Hero() {
                     ease: "easeInOut",
                 }}
             />
-            
+
             <div className="relative z-10 max-w-7xl mx-auto w-full ">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Left Content */}
@@ -106,21 +114,21 @@ export function Hero() {
                                 <Link
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    to="https://www.canva.com/design/DAFj-JlZs_I/lYKRtoro-a54diJcflWvuA/view?utm_content=DAFj-JlZs_I&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+                                    to={Resume}
+                                    // to="https://www.canva.com/design/DAFj-JlZs_I/lYKRtoro-a54diJcflWvuA/view?utm_content=DAFj-JlZs_I&utm_campaign=designshare&utm_medium=link&utm_source=editor"
                                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-poppins font-medium px-8 py-3 rounded-full shadow-lg"
                                 >
                                     Check My Resume
                                 </Link>
                             </motion.div>
-                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="https://github.com/venu123143"
-                                    className="font-poppins font-medium px-8 py-3 rounded-full border-2 hover:bg-blue-50 dark:hover:bg-slate-800"
+                            <motion.div onClick={() => scrollToSection('projects')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <span
+                                    className="cursor-pointer font-poppins font-medium px-8 py-3 rounded-full border-2 hover:bg-blue-50 dark:hover:bg-slate-800"
                                 >
                                     Visit Dashboards
-                                </a>
+
+                                </span>
+                                {/* </a> */}
                             </motion.div>
                         </motion.div>
 

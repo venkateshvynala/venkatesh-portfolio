@@ -236,7 +236,7 @@ export const Projects = () => {
                       <h3 className="text-3xl font-bold gradient-text mb-3">
                         {fullScreenProject.title}
                       </h3>
-                      <p className="text-foreground text-lg leading-relaxed whitespace-pre-line">
+                      <p className="tighter-justify  text-foreground text-lg leading-relaxed whitespace-pre-line">
                         {fullScreenProject.description}
                       </p>
                     </div>
