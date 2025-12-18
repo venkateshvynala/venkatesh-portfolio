@@ -75,7 +75,7 @@ export const experienceData = [
         title: "System Engineer – Power BI Developer",
         company: "Tata Consultancy Services (TCS)",
         client: "Client: Zebra Technologies | Hyderabad",
-        period: "June 2023 – Present",
+        period: "June 2021 – Present",
         icon: Building2,
         isCurrent: true,
         achievements: [
@@ -94,7 +94,7 @@ export const experienceData = [
         title: "Assistant System Engineer – Power BI Developer",
         company: "Tata Consultancy Services (TCS)",
         client: "Client: Vodafone UK Digital | Hyderabad",
-        period: "Feb 2022 – May 2023",
+        period: "Feb 2020 – May 2021",
         icon: Briefcase,
         isCurrent: false,
         achievements: [
@@ -356,14 +356,14 @@ export const educationList = [
     {
         degree: "Bachelor of Engineering - Civil Engineering",
         institution: "Jayamukhi Institute of Technological Sciences, Warangal",
-        year: "July 2021",
+        year: "July 2020",
         percentage: "78%",
         color: "from-blue-500 to-purple-600",
     },
     {
         degree: "Diploma - Civil Engineering",
         institution: "VMR Polytechnic College, Warangal",
-        year: "July 2018",
+        year: "July 2017",
         percentage: "80%",
         color: "from-green-500 to-emerald-600",
     },

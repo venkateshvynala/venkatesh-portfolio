@@ -1,5 +1,5 @@
 // Experience related constants
-export const EXPERIENCE_YEARS = "3+";
+export const EXPERIENCE_YEARS = "5+";
 export const JIRA_BOARDS_MANAGED = "50+";
 export const SCRUM_TEAMS_SUPPORTED = "10+";
 export const REPORTS_GENERATED = "30+";
