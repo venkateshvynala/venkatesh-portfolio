@@ -3,23 +3,7 @@
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { GraduationCap, Calendar } from "lucide-react"
-
-const educationList = [
-    {
-        degree: "Bachelor of Engineering - Civil Engineering",
-        institution: "Jayamukhi Institute of Technological Sciences, Warangal",
-        year: "July 2021",
-        percentage: "78%",
-        color: "from-blue-500 to-purple-600",
-    },
-    {
-        degree: "Diploma - Civil Engineering",
-        institution: "VMR Polytechnic College, Warangal",
-        year: "July 2018",
-        percentage: "80%",
-        color: "from-green-500 to-emerald-600",
-    },
-]
+import { educationList, educationContent } from "@/data/data"
 
 export function Education() {
     return (
@@ -38,7 +22,7 @@ export function Education() {
                         transition={{ duration: 0.6 }}
                         className="text-3xl sm:text-4xl lg:text-5xl font-bold font-poppins text-slate-900 dark:text-white mb-4"
                     >
-                        Education
+                        {educationContent.title}
                     </motion.h2>
                     <motion.div
                         initial={{ width: 0 }}

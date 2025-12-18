@@ -5,8 +5,8 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { Database, ChevronDown, BarChart3, Calendar } from "lucide-react"
 import { fadeInUp, staggerContainer } from "@/components/theme/animation-variants"
-import { Linkedin, Mail, Phone } from 'lucide-react';
 import Resume from "@/assets/VYNALA_VENKATESH.pdf"
+import { heroData } from "@/data/data"
 
 interface HeroProps {
     scrollToSection: (sectionId: string) => void
@@ -79,7 +79,7 @@ export function Hero({ scrollToSection }: HeroProps) {
                                 transition={{ duration: 0.6, delay: 0.2 }}
                                 className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium font-poppins mb-4"
                             >
-                                👋 Hello, I'm
+                                {heroData.greeting}
                             </motion.span>
                         </motion.div>
 
@@ -87,14 +87,14 @@ export function Hero({ scrollToSection }: HeroProps) {
                             variants={fadeInUp}
                             className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins text-slate-900 dark:text-white mb-4 leading-tight"
                         >
-                            Venkatesh Vynala
+                            {heroData.name}
                             <motion.span
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1, duration: 0.8 }}
                                 className="block text-3xl sm:text-4xl lg:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mt-2"
                             >
-                                Power BI Developer
+                                {heroData.title}
                             </motion.span>
                         </motion.h1>
 
@@ -102,8 +102,7 @@ export function Hero({ scrollToSection }: HeroProps) {
                             variants={fadeInUp}
                             className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed font-inter max-w-2xl mx-auto lg:mx-0"
                         >
-                            Certified Power BI Deveoper with <span className="font-semibold text-blue-600">3+ years </span>
-                            of experience in Business Intelligence, Data Modeling, and Dashboard Development. Skilled in Power BI, SQL, Azure DevOps, JIRA administration, and CI/CD automation.
+                            {heroData.description}
                             <span className=""></span>
                         </motion.p>
 
@@ -116,14 +115,14 @@ export function Hero({ scrollToSection }: HeroProps) {
                                     // to="https://www.canva.com/design/DAFj-JlZs_I/lYKRtoro-a54diJcflWvuA/view?utm_content=DAFj-JlZs_I&utm_campaign=designshare&utm_medium=link&utm_source=editor"
                                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-poppins font-medium px-8 py-3 rounded-full shadow-lg"
                                 >
-                                    Check My Resume
+                                    {heroData.resumeButton}
                                 </Link>
                             </motion.div>
                             <motion.div onClick={() => scrollToSection('projects')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                 <span
                                     className="cursor-pointer font-poppins font-medium px-8 py-3 rounded-full border-2 hover:bg-blue-50 dark:hover:bg-slate-800"
                                 >
-                                    Visit Dashboards
+                                    {heroData.projectsButton}
 
                                 </span>
                                 {/* </a> */}
@@ -131,12 +130,7 @@ export function Hero({ scrollToSection }: HeroProps) {
                         </motion.div>
 
                         <motion.div variants={fadeInUp} className="flex justify-center lg:justify-start space-x-4">
-                            {[
-                                { icon: Linkedin, href: "https://www.linkedin.com/in/venkatesh-vynala-43b8b81a8/", color: "hover:text-blue-600" },
-                                // { icon: Briefcase, href: "https://www.fiverr.com/sellers/venu_9090/", color: "hover:text-green-600" },
-                                { icon: Mail, href: "mailto:venkateshvynala001@gmail.com", color: "hover:text-red-600" },
-                                { icon: Phone, href: "tel:+919642594022", color: "hover:text-purple-600" },
-                            ].map((social, index) => (
+                            {heroData.socialLinks.map((social, index) => (
                                 <motion.a
                                     key={index}
                                     href={social.href}
@@ -225,7 +219,7 @@ export function Hero({ scrollToSection }: HeroProps) {
                             transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
                             className="flex flex-col items-center space-y-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                         >
-                            <span className="text-sm font-poppins">Scroll to explore</span>
+                            <span className="text-sm font-poppins">{heroData.scrollText}</span>
                             <ChevronDown className="h-5 w-5" />
                         </motion.div>
                     </motion.div>

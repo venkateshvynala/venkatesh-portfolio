@@ -3,6 +3,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { ThemeToggle } from "@/components/theme/ToggleTheme"
 import { Menu, X } from "lucide-react"
+import { navigationItems, navigationName } from "@/data/data"
 
 interface NavigationProps {
     activeSection: string
@@ -32,12 +33,12 @@ export function Navigation({ activeSection, scrollToSection }: NavigationProps) 
                         className="text-2xl font-bold font-poppins bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent cursor-pointer"
                         onClick={() => handleScrollToSection("home")}
                     >
-                        Venkatesh Vynala
+                        {navigationName}
                     </motion.div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        {["home", "about", "experience", "projects", "skills", "education", "contact"].map((item) => (
+                        {navigationItems.map((item) => (
                             <motion.button
                                 key={item}
                                 whileHover={{ y: -2 }}
@@ -81,7 +82,7 @@ export function Navigation({ activeSection, scrollToSection }: NavigationProps) 
                     className="md:hidden overflow-hidden border-t border-white/20 dark:border-slate-700/50"
                 >
                     <div className="py-4 space-y-2">
-                        {["home", "about", "experience", "projects", "skills", "education", "contact"].map((item) => (
+                        {navigationItems.map((item) => (
                             <motion.button
                                 key={item}
                                 whileHover={{ x: 10 }}

@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3, Users, Database, Brain, Target, Zap, Lightbulb, Shield, PieChart } from "lucide-react"
+import { Brain } from "lucide-react"
+import { aboutSkills, aboutStats, aboutContent } from "@/data/data"
 
 const staggerContainer = {
     animate: {
@@ -25,16 +26,6 @@ const slideInRight = {
 }
 
 export function About() {
-    const skills = [
-        { name: "Power BI", color: "from-blue-500 to-purple-500", icon: BarChart3 },
-        { name: "DAX", color: "from-green-500 to-blue-500", icon: Brain },
-        { name: "Power Query", color: "from-orange-500 to-red-500", icon: Zap },
-        { name: "SQL Server", color: "from-purple-500 to-pink-500", icon: Database },
-        { name: "Azure DevOps", color: "from-blue-600 to-cyan-500", icon: Target },
-        { name: "JIRA", color: "from-yellow-500 to-orange-500", icon: Lightbulb },
-        { name: "Data Modeling", color: "from-indigo-500 to-purple-500", icon: BarChart3 },
-        { name: "RLS", color: "from-emerald-500 to-teal-500", icon: Shield },
-    ]
 
     return (
         <section id="about" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -85,11 +76,11 @@ export function About() {
                     </motion.div>
                     <h2 className="text-4xl sm:text-5xl font-bold mb-6">
                         <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                            About Me
+                            {aboutContent.title}
                         </span>
                     </h2>
                     <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        A passionate Power BI Developer with a creative approach to data visualization and business intelligence
+                        {aboutContent.subtitle}
                     </p>
                 </motion.div>
 
@@ -108,7 +99,7 @@ export function About() {
                                 whileHover={{ x: 10 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                Certified Power BI Developer with over <span className="font-semibold text-blue-600 dark:text-blue-400">3+ years</span> of proven experience in Business Intelligence, Data Modeling, and Dashboard Development. Skilled at transforming complex datasets into actionable insights that enhance decision-making and operational efficiency.
+                                {aboutContent.description1}
                             </motion.p>
 
                             <motion.p
@@ -116,17 +107,17 @@ export function About() {
                                 whileHover={{ x: 10 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                Specialized in end-to-end BI solution development using Power BI, SQL, Azure DevOps, and JIRA. Expert in designing optimized data models with Star/Snowflake schema and implementing Row-Level Security (RLS) with performance tuning using DAX and Power Query.
+                                {aboutContent.description2}
                             </motion.p>
                         </div>
 
                         {/* Skills Grid */}
                         <div>
                             <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                                Core Skills & Technologies
+                                {aboutContent.skillsTitle}
                             </h3>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                {skills.map((skill, index) => (
+                                {aboutSkills.map((skill, index) => (
                                     <motion.div
                                         key={skill.name}
                                         initial={{ opacity: 0, scale: 0.8 }}
@@ -152,36 +143,7 @@ export function About() {
 
                     {/* Right Content - Stats Cards */}
                     <motion.div variants={slideInRight} className="grid grid-cols-2 gap-6">
-                        {[
-                            {
-                                icon: BarChart3,
-                                number: "50+",
-                                label: "JIRA Boards Managed",
-                                color: "from-blue-500 to-purple-500",
-                                delay: 0.1
-                            },
-                            {
-                                icon: Users,
-                                number: "10+",
-                                label: "Scrum Teams Supported",
-                                color: "from-green-500 to-blue-500",
-                                delay: 0.2
-                            },
-                            {
-                                icon: PieChart,
-                                number: "30+",
-                                label: "Reports generated",
-                                color: "from-orange-500 to-red-500",
-                                delay: 0.3
-                            },
-                            {
-                                icon: Database,
-                                number: "3+",
-                                label: "Years Experience",
-                                color: "from-pink-500 to-purple-500",
-                                delay: 0.4
-                            },
-                        ].map((stat) => (
+                        {aboutStats.map((stat) => (
                             <motion.div
                                 key={stat.label}
                                 initial={{ opacity: 0, y: 30, scale: 0.8 }}

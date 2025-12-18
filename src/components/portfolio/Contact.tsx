@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Linkedin, Github, Send, MessageCircle, Globe, Heart } from "lucide-react"
+import { Mail, Send, MessageCircle, Globe, Heart } from "lucide-react"
+import { contactInfo, contactSocialLinks, contactContent } from "@/data/data"
 
 const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -20,46 +21,6 @@ const staggerContainer = {
 }
 
 export function Contact() {
-    const contactInfo = [
-        { 
-            icon: Mail, 
-            value: "venkateshvynala001@gmail.com", 
-            label: "Email",
-            color: "from-blue-500 to-purple-500",
-            href: "mailto:venkateshvynala001@gmail.com"
-        },
-        { 
-            icon: Phone, 
-            value: "+91 9642594022", 
-            label: "Phone",
-            color: "from-green-500 to-blue-500",
-            href: "tel:+919642594022"
-        },
-        { 
-            icon: MapPin, 
-            value: "Hyderabad, India", 
-            label: "Location",
-            color: "from-orange-500 to-red-500",
-            href: "#"
-        },
-    ]
-
-    const socialLinks = [
-        { 
-            name: "LinkedIn", 
-            icon: Linkedin, 
-            color: "from-blue-600 to-blue-700",
-            href: "https://linkedin.com/in/venkatesh-vynala-43b8b81a8",
-            description: "Professional Network"
-        },
-        { 
-            name: "GitHub", 
-            icon: Github, 
-            color: "from-gray-700 to-gray-900",
-            href: "#",
-            description: "Code Repository"
-        },
-    ]
 
     return (
         <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -110,12 +71,11 @@ export function Contact() {
                     </motion.div>
                     <h2 className="text-4xl sm:text-5xl font-bold mb-6">
                         <span className="bg-gradient-to-r from-pink-600 via-red-600 to-orange-600 bg-clip-text text-transparent">
-                            Let's Connect
+                            {contactContent.title}
                         </span>
                     </h2>
                     <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Ready to discuss how I can help transform your data into actionable insights? 
-                        Let's connect and explore opportunities together.
+                        {contactContent.subtitle}
                     </p>
                 </motion.div>
 
@@ -135,11 +95,10 @@ export function Contact() {
                                     <div className="text-center lg:text-left">
                                         <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200 flex items-center justify-center lg:justify-start gap-3">
                                             <Globe className="h-6 w-6 text-pink-500" />
-                                            Get In Touch
+                                            {contactContent.getInTouchTitle}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                                            I'm always excited to discuss new opportunities, collaborations, or just chat about 
-                                            data analytics and business intelligence. Feel free to reach out through any of these channels!
+                                            {contactContent.getInTouchDescription}
                                         </p>
                                     </div>
 
@@ -179,16 +138,15 @@ export function Contact() {
                                     <div className="text-center lg:text-left">
                                         <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200 flex items-center justify-center lg:justify-start gap-3">
                                             <Heart className="h-6 w-6 text-red-500" />
-                                            Follow & Connect
+                                            {contactContent.followTitle}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                                            Stay updated with my latest work, insights, and professional journey. 
-                                            Let's build meaningful connections in the data community!
+                                            {contactContent.followDescription}
                                         </p>
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">
-                                        {socialLinks.map((social, index) => (
+                                        {contactSocialLinks.map((social, index) => (
                                             <motion.a
                                                 key={social.name}
                                                 href={social.href}
@@ -230,18 +188,17 @@ export function Contact() {
                                 className="mt-12 text-center p-8 bg-gradient-to-r from-pink-50 to-red-50 dark:from-pink-950/50 dark:to-red-950/50 rounded-2xl border border-pink-200/50 dark:border-pink-800/50"
                             >
                                 <h4 className="text-xl font-semibold text-pink-800 dark:text-pink-200 mb-3">
-                                    Ready to Start a Project?
+                                    {contactContent.ctaTitle}
                                 </h4>
                                 <p className="text-pink-700 dark:text-pink-300 mb-6 leading-relaxed">
-                                    Let's discuss how I can help bring your data vision to life with powerful 
-                                    business intelligence solutions and stunning visualizations.
+                                    {contactContent.ctaDescription}
                                 </p>
                                 <Button 
                                     size="lg"
                                     className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                                 >
                                     <Mail className="h-5 w-5 mr-2" />
-                                    Start a Conversation
+                                    {contactContent.ctaButton}
                                 </Button>
                             </motion.div>
                         </CardContent>

@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart3, Database, Award, Shield, Globe, Zap, Brain, Layers, RefreshCw } from "lucide-react"
+import { Brain } from "lucide-react"
+import { skillCategories, certifications, skillsContent } from "@/data/data"
 
 const staggerContainer = {
     animate: {
@@ -19,125 +20,6 @@ export function Skills() {
         animate: { opacity: 1, scale: 1 },
         transition: { duration: 0.8, ease: "easeOut" },
     }
-
-    const skillCategories = [
-        {
-            title: "Power BI & Visualization",
-            icon: BarChart3,
-            color: "from-blue-500 to-purple-500",
-            skills: [
-                "Power BI Desktop",
-                "Power BI Service",
-                "Power BI Mobile",
-                "Power BI Report Server",
-                "Custom Visuals",
-                "Bookmarks & Drill-throughs",
-                "Dashboard Design",
-                "Report Layouts"
-            ]
-        },
-        {
-            title: "Data Modeling & DAX",
-            icon: Database,
-            color: "from-green-500 to-blue-500",
-            skills: [
-                "DAX Formulas",
-                "Measures & Calculated Columns",
-                "Data Modeling",
-                "Star Schema",
-                "Snowflake Schema",
-                "Time Intelligence",
-                "Performance Optimization"
-            ]
-        },
-        {
-            title: "Data Transformation & ETL",
-            icon: RefreshCw,
-            color: "from-orange-500 to-red-500",
-            skills: [
-                "Power Query (M Language)",
-                "Data Cleaning",
-                "ETL Processes",
-                "Data Validation",
-                "Automated Data Refresh",
-                "Data Migration (CSV to Azure DevOps)"
-            ]
-        },
-        {
-            title: "Data Sources & Integration",
-            icon: Layers,
-            color: "from-cyan-500 to-blue-500",
-            skills: [
-                "SQL Server",
-                "Excel & SharePoint",
-                "Azure DevOps",
-                "JIRA Integration",
-                "REST APIs",
-                "OData",
-                "Git/Jenkins CI/CD"
-            ]
-        },
-        {
-            title: "DevOps & Jira  Administration",
-            icon: Shield,
-            color: "from-purple-500 to-pink-500",
-            skills: [
-                "Azure DevOps Boards",
-                "JIRA (Admin & Automation Rules)",
-                "Agile/Scrum/SAFe",
-                "CI/CD Pipelines (Jenkins)",
-                "Role-Based Access Control",
-                "Row-Level Security (RLS)"
-            ]
-        },
-        {
-            title: "Programming & Automation",
-            icon: Zap,
-            color: "from-yellow-500 to-orange-500",
-            skills: [
-                "Power Platform",
-                "Python (Basic)",
-                "Automation Scripting",
-                "Performance Tuning",
-                "Statistical Functions",
-                "Forecasting",
-                "What-If Analysis"
-            ]
-        }
-    ]
-
-    const certifications = [
-        {
-            name: "PL-300: Microsoft Certified Power BI Data Analyst Associate",
-            icon: Award,
-            color: "from-blue-500 to-purple-500",
-            badge: "Microsoft"
-        },
-        {
-            name: "AZ-900: Microsoft Certified Azure Fundamentals",
-            icon: Shield,
-            color: "from-blue-600 to-cyan-500",
-            badge: "Microsoft"
-        },
-        {
-            name: "Google Cloud: Associate Cloud Engineer",
-            icon: Globe,
-            color: "from-green-500 to-blue-500",
-            badge: "Google"
-        },
-        {
-            name: "Udemy: Power BI Desktop for Business Intelligence",
-            icon: Zap,
-            color: "from-yellow-500 to-orange-500",
-            badge: "Udemy"
-        },
-        {
-            name: "Udemy: Complete SQL Bootcamp – From Zero to Hero",
-            icon: Database,
-            color: "from-purple-500 to-pink-500",
-            badge: "Udemy"
-        },
-    ]
 
     return (
         <section id="skills" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -188,11 +70,11 @@ export function Skills() {
                     </motion.div>
                     <h2 className="text-4xl sm:text-5xl font-bold mb-6">
                         <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                            Power BI & BI Skills
+                            {skillsContent.title}
                         </span>
                     </h2>
                     <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-                        Comprehensive expertise in Microsoft Power BI ecosystem, data modeling, and business intelligence solutions
+                        {skillsContent.subtitle}
                     </p>
                 </motion.div>
 
@@ -257,7 +139,7 @@ export function Skills() {
                 >
                     <h3 className="text-3xl font-bold mb-8">
                         <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            Certifications & Achievements
+                            {skillsContent.certificationsTitle}
                         </span>
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

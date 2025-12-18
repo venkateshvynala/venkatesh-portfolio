@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
+import { projectsData, projectsContent } from '@/data/data'
 
 interface Project {
   id: number
@@ -11,68 +12,16 @@ interface Project {
   technologies: string[]
 }
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "IT Agile Metrics Report",
-    description: "Developed a comprehensive IT Agile Metrics dashboard in Power BI, consolidating key metrics for 60+ IT projects. This one-stop solution tracks project status, resolution times, benefits realization, and ticket categorization—empowering IT product teams with actionable insights for improved delivery, prioritization, and value measurement across the portfolio.",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035600/powerbi-dashboards/IMG-20250824-WA0008_wvev71.jpg",
-    technologies: ["PowerBI", "DAX", "JIRA", "Data Modeling"]
-  },
-  {
-    id: 2,
-    title: "Defect Detection Efficiency",
-    description: "Developed a Power BI dashboard to track and visualize defect detection efficiency across multiple projects and environments. This report enables teams to monitor defect trends, analyze detection rates at key testing stages, and assess resolution progress—driving continuous quality improvement and faster defect closure.",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035599/powerbi-dashboards/IMG-20250824-WA0009_loa2qb.jpg",
-    technologies: ["PowerBI", "Excel", "JIRA", "Financial Modeling", "KPI Tracking"]
-  },
-  {
-    id: 3,
-    title: "ServiceNow Incident Management",
-    description: "Designed an interactive Power BI dashboard for ServiceNow Incident Management, visualizing incident age, status progress, and assignment details. This report enables rapid assessment and prioritization of 200+ open incidents, empowering stakeholders with real-time insights for quicker resolutions and improved service delivery.",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035599/powerbi-dashboards/IMG-20250824-WA0005_lzkdep.jpg",
-    technologies: ["PowerBI", "Machine Learning", "Dataflow", "Customer Analytics", "Predictive Modeling"]
-  },
-  {
-    id: 4,
-    title: "Contingent Workers Compliance and GRC metrics",
-    description: "Created a Power BI dashboard to monitor contingent worker compliance and GRC (Governance, Risk, and Compliance) metrics, providing real-time visibility into worker status, contact details, and certification adherence. This tool streamlines compliance tracking and supports proactive risk management for workforce governance.",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035599/powerbi-dashboards/IMG-20250824-WA0007_ohmzfd.jpg",
-    technologies: ["PowerBI", "Process Mining", "SQL", "Operational Analytics", "Performance Metrics"]
-  },
-  {
-    id: 5,
-    title: "PI Planning Management",
-    description: "Developed a comprehensive PMO Power BI dashboard integrating real-time Jira data to deliver strategic, high-level insights into 60+ IT projects. Designed for PMO stakeholders, the report consolidates project scopes, progress, and alignment statuses into an actionable, visually-driven overview—empowering transparent, data-led decision-making and streamlined project governance across multiple teams.",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035598/powerbi-dashboards/IMG-20250824-WA0006_ykawha.jpg",
-    technologies: ["PowerBI", "Supply Chain Analytics", "Demand Forecasting", "Inventory Management"]
-  },
-  {
-    id: 6,
-    title: "Key IT Programs & Releases",
-    description: "Designed a Power BI Gantt chart dashboard to visualize key IT programs and release schedules, detailing all testing events and timelines across multiple projects. This streamlined view enhances cross-team coordination, supports proactive planning, and provides clear visibility into release milestones and QA activities.",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756036986/powerbi-dashboards/WhatsApp_Image_2025-08-24_at_17.31.23_b1e64f9a_oe7cdt.jpg",
-    technologies: ["PowerBI", "JIRA", "SQL","Power Apps", "ROI Tracking", "Multi-channel Attribution"]
-  },
-  {
-    id: 7,
-    title: "Ecommerce Sales Dashboard",
-    description: "Designed a dynamic Power BI Ecommerce Sales Dashboard that delivers real-time visibility into sales, profits, and product performance across consumer, corporate, and home office segments. The report features category-wise breakdowns, top and bottom product analytics, regional and shipping insights, and interactive state-level mapping—equipping business leaders with actionable intelligence to optimize sales strategies and drive profitability",
-    image: "https://res.cloudinary.com/dsnq9xdwt/image/upload/v1756035598/powerbi-dashboards/IMG-20250824-WA0004_rwi2u3.jpg",
-    technologies: ["PowerBI", "Marketing Analytics", "ROI Tracking", "Multi-channel Attribution"]
-  }
-]
-
 export const Projects = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [isFullScreen, setIsFullScreen] = useState(false)
   const [fullScreenProject, setFullScreenProject] = useState<Project | null>(null)
 
   const itemsPerPage = 6
-  const totalPages = Math.ceil(projects.length / itemsPerPage)
+  const totalPages = Math.ceil(projectsData.length / itemsPerPage)
   const startIndex = currentPage * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const currentProjects = projects.slice(startIndex, endIndex)
+  const currentProjects = projectsData.slice(startIndex, endIndex)
 
   const goToPage = (page: number) => {
     setCurrentPage(page)
@@ -104,10 +53,10 @@ export const Projects = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-            My Projects
+            {projectsContent.title}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore my PowerBI dashboards and data analytics projects that transform raw data into actionable insights
+            {projectsContent.subtitle}
           </p>
         </div>
 
@@ -197,7 +146,7 @@ export const Projects = () => {
           {/* Page Counter */}
           <div className="text-center mt-4">
             <span className="text-muted-foreground text-sm">
-              Page {currentPage + 1} of {totalPages} ({startIndex + 1}-{Math.min(endIndex, projects.length)} of {projects.length})
+              Page {currentPage + 1} of {totalPages} ({startIndex + 1}-{Math.min(endIndex, projectsData.length)} of {projectsData.length})
             </span>
           </div>
         </div>

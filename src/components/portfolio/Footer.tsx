@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Heart, Sparkles, ArrowUp } from "lucide-react"
+import { footerLinks, footerContent } from "@/data/data"
 
 export function Footer() {
     const scrollToTop = () => {
@@ -66,7 +67,7 @@ export function Footer() {
                         className="text-2xl font-bold mb-4"
                     >
                         <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                            Vynala Venkatesh
+                            {footerContent.name}
                         </span>
                     </motion.h3>
                     
@@ -78,8 +79,7 @@ export function Footer() {
                         transition={{ delay: 0.3 }}
                         className="text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
                     >
-                        Transforming data into insights, one dashboard at a time. 
-                        Passionate about business intelligence and data visualization.
+                        {footerContent.tagline}
                     </motion.p>
                 </div>
 
@@ -91,16 +91,7 @@ export function Footer() {
                     transition={{ delay: 0.4 }}
                     className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto"
                 >
-                    {[
-                        { title: "About", href: "#about" },
-                        { title: "Experience", href: "#experience" },
-                        { title: "Projects", href: "#projects" },
-                        { title: "Skills", href: "#skills" },
-                        { title: "Education", href: "#education" },
-                        { title: "Contact", href: "#contact" },
-                        { title: "Resume", href: "#resume" },
-                        { title: "Blog", href: "#blog" },
-                    ].map((link, index) => (
+                    {footerLinks.map((link, index) => (
                         <motion.a
                             key={link.title}
                             href={link.href}
@@ -139,7 +130,7 @@ export function Footer() {
                         className="text-gray-400 text-center md:text-left"
                     >
                         <p className="flex items-center justify-center md:justify-start gap-2">
-                            © 2024 Vynala Venkatesh. Made with 
+                            {footerContent.copyright} 
                             <Heart className="h-4 w-4 text-red-400 animate-pulse" />
                             and lots of coffee ☕
                         </p>
@@ -170,10 +161,10 @@ export function Footer() {
                     className="mt-8 text-center"
                 >
                     <p className="text-gray-500 text-sm">
-                        Built with React, TypeScript, Tailwind CSS, and Framer Motion
+                        {footerContent.techStack}
                     </p>
                     <p className="text-gray-500 text-sm mt-2">
-                        Hosted on Vercel • Designed with ❤️ in Hyderabad, India
+                        {footerContent.hosting}
                     </p>
                 </motion.div>
             </div>
